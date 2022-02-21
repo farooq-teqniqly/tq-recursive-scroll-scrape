@@ -1,11 +1,17 @@
+"""
+A sample application demonstrating RecursiveScrollScrape usage.
+"""
 from typing import Optional
-
-from bs4 import BeautifulSoup
-from tq.recursive_scroll_and_scrape import RecursiveScrollScrape
 import sys
+from bs4 import BeautifulSoup
+from tq_recursive_scroll_scrape.recursive_scroll_and_scrape import RecursiveScrollScrape
 
 
-def main():
+def main() -> int:
+    """
+    The sample application entry point.
+    :return: The operating system exit code.
+    """
     root_url = "https://www.trulia.com"
     first_url = f"{root_url}/WA/Renton"
 
@@ -17,7 +23,9 @@ def main():
     def _get_next_url(content: str) -> Optional[str]:
         soup = BeautifulSoup(content, "html.parser")
 
-        links = [a for a in soup.find_all("a") if a.get("aria-label") and "Next" in a.get("aria-label")]
+        links = [a for a in soup.find_all("a")
+                 if a.get("aria-label")
+                 and "Next" in a.get("aria-label")]
 
         if len(links) == 0:
             return None
@@ -27,6 +35,7 @@ def main():
         return next_url
 
     scroll_scraper.download(first_url, _on_after_download, _get_next_url)
+    return 0
 
 
 if __name__ == "__main__":
