@@ -4,7 +4,6 @@ Recursive Scroll and Scrape module.
 from functools import partial
 from typing import Callable, Optional
 
-
 # pylint: disable=too-few-public-methods
 from tq_scroll_scrape.scroll_and_scrape import ScrollAndScrape
 
@@ -21,8 +20,8 @@ class RecursiveScrollScrape:
     The sample app is sample_app.py demonstrates this using Trulia's site.
     """
 
-    def __init__(self):
-        self.scroll_scraper = ScrollAndScrape()
+    def __init__(self, driver_path: str):
+        self.scroll_scraper = ScrollAndScrape(driver_path)
 
     def download(
             self,

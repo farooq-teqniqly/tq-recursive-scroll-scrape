@@ -1,6 +1,7 @@
 """
 A sample application demonstrating RecursiveScrollScrape usage.
 """
+import os.path
 from typing import Optional
 import sys
 from bs4 import BeautifulSoup
@@ -15,7 +16,8 @@ def main() -> int:
     root_url = "https://www.trulia.com"
     first_url = f"{root_url}/WA/Renton"
 
-    scroll_scraper = RecursiveScrollScrape()
+    driver_path = os.path.join(os.getcwd(), "chromedriver.exe")
+    scroll_scraper = RecursiveScrollScrape(driver_path)
 
     def _on_after_download(content: str):
         print(f"on_after_download ==> content length ==> {len(content)}")
